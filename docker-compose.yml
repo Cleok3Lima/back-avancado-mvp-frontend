@@ -1,0 +1,32 @@
+# docker-compose.yml
+# Sobe o backend (FastAPI) e o frontend (React/nginx) juntos
+
+services:
+  # ─── Backend ────────────────────────────────────────────────���────────────
+  backend:
+    build:
+      context: ../back-avancado-mvp-backend
+      dockerfile: Dockerfile
+    container_name: rickmorty-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persiste o banco de dados SQLite entre reinicializações do container
+      - ./data:/app/data
+    restart: unless-stopped
+
+  # ─── Frontend ──────────────────────────────────────────────────────────��──
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Endereço que o BROWSER usa para alcançar o backend
+        # Em Docker Compose, o frontend nginx serve no host — então usa localhost
+        VITE_API_URL: http://localhost:8000
+    container_name: rickmorty-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
