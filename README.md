@@ -6,6 +6,8 @@ Aplicação React para gerenciar um diário pessoal de episódios da série **Ri
 
 ## Arquitetura
 
+![Diagrama de Arquitetura](public/arquitetura_cenario1_1.svg)
+
 ```
 ┌──────────────────────────┐        REST/JSON        ┌──────────────────────────┐
 │  Frontend React (porta 80) │ ──────────────────────► │  Backend FastAPI (porta  │
