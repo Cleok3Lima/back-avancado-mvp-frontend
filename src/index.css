@@ -1,0 +1,562 @@
+/* index.css — Estilos globais com tema Rick and Morty */
+
+/* ─── Variáveis ─────────────────────────────────────────────────────────── */
+:root {
+  --green: #97ce4c;      /* Verde característico do Rick */
+  --teal: #44b7c2;       /* Azul-teal do portal */
+  --portal: #00b5cc;
+  --dark: #111827;
+  --dark-2: #1f2937;
+  --dark-3: #374151;
+  --text: #e5e7eb;
+  --text-muted: #9ca3af;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --radius: 12px;
+  --shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* ─── Reset & Base ──────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  background-color: var(--dark);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  color: var(--green);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ─── Navbar ────────────────────────────────────────────────────────────── */
+.navbar {
+  background: var(--dark-2);
+  border-bottom: 2px solid var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar__brand a {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--green);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar__link {
+  color: var(--text-muted);
+  font-weight: 500;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--green);
+  border-bottom-color: var(--green);
+  text-decoration: none;
+}
+
+/* ─── Main & Footer ─────────────────────────────────────────────────────── */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.footer {
+  text-align: center;
+  padding: 1rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--dark-3);
+}
+
+/* ─── Page ──────────────────────────────────────────────────────────────── */
+.page__header {
+  margin-bottom: 1.5rem;
+}
+
+.page__header h1 {
+  font-size: 1.8rem;
+  color: var(--green);
+}
+
+.page__subtitle {
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ─── Botões ────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.2s, transform 0.1s;
+  text-decoration: none;
+}
+
+.btn:hover:not(:disabled) {
+  opacity: 0.85;
+  text-decoration: none;
+}
+
+.btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn--primary {
+  background: var(--green);
+  color: var(--dark);
+}
+
+.btn--secondary {
+  background: var(--dark-3);
+  color: var(--text);
+}
+
+.btn--danger {
+  background: var(--danger);
+  color: white;
+}
+
+.btn--back {
+  background: transparent;
+  color: var(--text-muted);
+  padding: 4px 0;
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+/* ─── Badges ────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.badge--season {
+  background: var(--teal);
+  color: var(--dark);
+}
+
+.badge--ep {
+  background: var(--dark-3);
+  color: var(--text-muted);
+}
+
+/* ─── Episode Grid ──────────────────────────────────────────────────────── */
+.episode-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.episode-card {
+  background: var(--dark-2);
+  border: 1px solid var(--dark-3);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.episode-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 0 12px rgba(151, 206, 76, 0.2);
+}
+
+.episode-card__title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+.episode-card__date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ─── Pagination ────────────────────────────────────────────────────────── */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.pagination__info {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ─── Episode Detail ────────────────────────────────────────────────────── */
+.episode-detail__header {
+  margin-bottom: 2rem;
+}
+
+.episode-detail__header h1 {
+  font-size: 2rem;
+  color: var(--green);
+  margin: 0.5rem 0;
+}
+
+.episode-detail__badge {
+  display: inline-block;
+  background: var(--teal);
+  color: var(--dark);
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.episode-detail__section {
+  margin-bottom: 2.5rem;
+}
+
+.episode-detail__section h2 {
+  font-size: 1.2rem;
+  color: var(--teal);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--dark-3);
+  padding-bottom: 0.5rem;
+}
+
+/* ─── Character Grid ────────────────────────────────────────────────────── */
+.character-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+}
+
+.character-card {
+  background: var(--dark-2);
+  border-radius: 10px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid var(--dark-3);
+  transition: border-color 0.2s;
+}
+
+.character-card:hover {
+  border-color: var(--teal);
+}
+
+.character-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+}
+
+.character-card__name {
+  font-size: 0.72rem;
+  padding: 4px;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.character-card__status {
+  display: block;
+  font-size: 0.65rem;
+  padding: 2px 4px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.character-card__status--alive { color: var(--green); }
+.character-card__status--dead  { color: var(--danger); }
+.character-card__status--unknown { color: var(--text-muted); }
+
+/* ─── Diary Form ────────────────────────────────────────────────────────── */
+.diary-form {
+  background: var(--dark-2);
+  border: 1px solid var(--dark-3);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.diary-form__title {
+  color: var(--green);
+  font-size: 1.1rem;
+}
+
+.diary-form__episode-name {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.diary-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.diary-form__field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.diary-form__field textarea {
+  background: var(--dark-3);
+  border: 1px solid var(--dark-3);
+  border-radius: 8px;
+  padding: 0.75rem;
+  color: var(--text);
+  font-size: 0.95rem;
+  resize: vertical;
+  font-family: inherit;
+  transition: border-color 0.2s;
+}
+
+.diary-form__field textarea:focus {
+  outline: none;
+  border-color: var(--green);
+}
+
+.diary-form__char-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.diary-form__error {
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+/* ─── Diary Existing Entry ──────────────────────────────────────────────── */
+.diary-existing {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 600px;
+}
+
+.diary-existing__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.diary-existing__nota {
+  background: var(--dark-2);
+  border-left: 3px solid var(--green);
+  padding: 1rem 1.25rem;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ─── Diary List (MyDiary page) ─────────────────────────────────────────── */
+.diary-filters {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.diary-filters__group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.diary-filters__group label {
+  color: var(--text-muted);
+}
+
+.diary-filters__group select {
+  background: var(--dark-2);
+  border: 1px solid var(--dark-3);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.diary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.diary-card {
+  background: var(--dark-2);
+  border: 1px solid var(--dark-3);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: border-color 0.2s;
+}
+
+.diary-card:hover {
+  border-color: var(--teal);
+}
+
+.diary-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.diary-card__title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--green);
+}
+
+.diary-card__date {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.diary-card__nota {
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+}
+
+.diary-card__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* ─── Confirm overlay ───────────────────────────────────────────────────── */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+.confirm-box {
+  background: var(--dark-2);
+  border: 1px solid var(--danger);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  max-width: 360px;
+  text-align: center;
+}
+
+.confirm-box p {
+  margin-bottom: 1rem;
+}
+
+.confirm-box__actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+/* ─── Alerts ────────────────────────────────────────────────────────────── */
+.alert {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.alert--error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid var(--danger);
+  color: #fca5a5;
+}
+
+.alert--success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid var(--success);
+  color: #86efac;
+}
+
+/* ─── Loading ───────────────────────────────────────────────────────────── */
+.loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  font-size: 1rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ─── Empty state ───────────────────────────────────────────────────────── */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
