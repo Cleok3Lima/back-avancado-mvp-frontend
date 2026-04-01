@@ -88,24 +88,33 @@ docker-compose up --build
 
 ## Páginas
 
-| Rota              | Página          | Descrição                                              |
-|-------------------|-----------------|--------------------------------------------------------|
-| `/`               | Home            | Grade de episódios com paginação                       |
-| `/episodio/:id`   | Episode Detail  | Detalhes do episódio, personagens e formulário diário  |
-| `/diario`         | My Diary        | Lista de entradas com filtros, edição e exclusão       |
+| Rota              | Protegida | Página          | Descrição                                              |
+|-------------------|-----------|-----------------|--------------------------------------------------------|
+| `/`               | Não       | Home            | Grade de episódios com paginação                       |
+| `/login`          | Não       | Login           | Formulário de autenticação                             |
+| `/register`       | Não       | Registrar       | Formulário de cadastro de novo usuário                 |
+| `/episodio/:id`   | Sim       | Episode Detail  | Detalhes do episódio, personagens e formulário diário  |
+| `/diario`         | Sim       | My Diary        | Lista de entradas com filtros, edição e exclusão       |
+
+> Rotas protegidas redirecionam para `/login` se o usuário não estiver autenticado.
 
 ---
 
 ## Rotas HTTP utilizadas (chamadas ao backend)
 
-| Método   | Rota                  | Descrição                                    |
-|----------|-----------------------|----------------------------------------------|
-| `GET`    | `/episodios`          | Lista episódios paginados                    |
-| `GET`    | `/episodios/{id}`     | Detalhes do episódio + personagens           |
-| `GET`    | `/diario`             | Lista entradas do diário                     |
-| `POST`   | `/diario`             | Cria nova entrada no diário                  |
-| `PUT`    | `/diario/{id}`        | Atualiza nota/avaliação de uma entrada       |
-| `DELETE` | `/diario/{id}`        | Remove uma entrada do diário                 |
+| Método   | Rota                  | Auth         | Descrição                                    |
+|----------|-----------------------|--------------|----------------------------------------------|
+| `POST`   | `/auth/register`      | —            | Cadastra novo usuário                        |
+| `POST`   | `/auth/login`         | —            | Faz login e obtém token JWT                  |
+| `GET`    | `/auth/me`            | Bearer JWT   | Valida sessão ao carregar a aplicação        |
+| `GET`    | `/episodios`          | —            | Lista episódios paginados                    |
+| `GET`    | `/episodios/{id}`     | —            | Detalhes do episódio + personagens           |
+| `GET`    | `/diario`             | Bearer JWT   | Lista entradas do diário do usuário          |
+| `POST`   | `/diario`             | Bearer JWT   | Cria nova entrada no diário                  |
+| `PUT`    | `/diario/{id}`        | Bearer JWT   | Atualiza nota/avaliação de uma entrada       |
+| `DELETE` | `/diario/{id}`        | Bearer JWT   | Remove uma entrada do diário                 |
+
+> O token JWT é armazenado no `localStorage` e injetado automaticamente em todas as requisições via interceptor do Axios.
 
 ---
 
@@ -137,14 +146,20 @@ docker-compose up --build
 ```
 src/
 ├── api/
-│   └── api.js              # Instância Axios + funções de API
+│   └── api.js                  # Instância Axios + funções de API + interceptors JWT
+├── context/
+│   └── AuthContext.jsx         # Estado global de autenticação (AuthProvider + useAuth)
 ├── pages/
-│   ├── Home.jsx            # Lista de episódios com paginação
-│   ├── EpisodeDetail.jsx   # Detalhe do episódio + formulário do diário
-│   └── MyDiary.jsx         # Diário completo com filtros e ações
+│   ├── Home.jsx                # Lista de episódios com paginação (pública)
+│   ├── Login.jsx               # Formulário de login
+│   ├── Register.jsx            # Formulário de cadastro
+│   ├── EpisodeDetail.jsx       # Detalhe do episódio + formulário do diário (protegida)
+│   └── MyDiary.jsx             # Diário completo com filtros e ações (protegida)
 └── components/
-    ├── EpisodeCard.jsx      # Card de episódio na grade
-    ├── DiaryEntryForm.jsx   # Formulário de criar/editar entrada
-    ├── DiaryEntryCard.jsx   # Card de entrada no diário
-    └── StarRating.jsx       # Componente de avaliação por estrelas
+    ├── Navbar.jsx              # Barra de navegação com estado de auth
+    ├── ProtectedRoute.jsx      # Wrapper que redireciona para /login se não autenticado
+    ├── EpisodeCard.jsx         # Card de episódio na grade
+    ├── DiaryEntryForm.jsx      # Formulário de criar/editar entrada
+    ├── DiaryEntryCard.jsx      # Card de entrada no diário
+    └── StarRating.jsx          # Componente de avaliação por estrelas
 ```
