@@ -53,7 +53,14 @@ export const deleteDiario = (id) => api.delete(`/diario/${id}`);
 
 export const register = (data) => api.post("/auth/register", data);
 
-export const loginApi = (data) => api.post("/auth/login", data);
+export const loginApi = ({ username, password }) => {
+  const form = new URLSearchParams();
+  form.append("username", username);
+  form.append("password", password);
+  return api.post("/auth/login", form, {
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  });
+};
 
 export const getMe = () => api.get("/auth/me");
 
