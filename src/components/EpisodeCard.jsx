@@ -7,6 +7,13 @@ import { Link } from "react-router-dom";
  * @param {object} episode - Objeto do episódio vindo da API
  *   { id, name, episode, air_date }
  */
+function formatDatePtBR(dateStr) {
+  if (!dateStr) return dateStr;
+  const date = new Date(dateStr);
+  if (isNaN(date)) return dateStr;
+  return date.toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" });
+}
+
 export default function EpisodeCard({ episode }) {
   // O campo "episode" da API vem no formato "S01E01"
   const season = episode.episode ? episode.episode.slice(1, 3) : "?";
@@ -22,7 +29,7 @@ export default function EpisodeCard({ episode }) {
       <h3 className="episode-card__title">{episode.name}</h3>
 
       <p className="episode-card__date">
-        📅 {episode.air_date}
+        📅 {formatDatePtBR(episode.air_date)}
       </p>
 
       <Link to={`/episodio/${episode.id}`} className="btn btn--primary">

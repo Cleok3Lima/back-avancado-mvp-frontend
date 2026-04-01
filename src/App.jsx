@@ -1,58 +1,59 @@
 // App.jsx
-// Componente raiz — define as rotas e o layout global da aplicação
+// Componente raiz — define as rotas, AuthProvider e layout global da aplicação
 
-import { BrowserRouter, Routes, Route, Link, NavLink } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navbar";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import EpisodeDetail from "./pages/EpisodeDetail";
 import MyDiary from "./pages/MyDiary";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 export default function App() {
   return (
     <BrowserRouter>
-      {/* Barra de navegação global */}
-      <header className="navbar">
-        <div className="navbar__brand">
-          <Link to="/">🛸 Rick &amp; Morty Diário</Link>
-        </div>
-        <nav className="navbar__links">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              isActive ? "navbar__link navbar__link--active" : "navbar__link"
-            }
-          >
-            Episódios
-          </NavLink>
-          <NavLink
-            to="/diario"
-            className={({ isActive }) =>
-              isActive ? "navbar__link navbar__link--active" : "navbar__link"
-            }
-          >
-            Meu Diário
-          </NavLink>
-        </nav>
-      </header>
+      <AuthProvider>
+        <Navbar />
 
-      {/* Conteúdo principal */}
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/episodio/:id" element={<EpisodeDetail />} />
-          <Route path="/diario" element={<MyDiary />} />
-        </Routes>
-      </main>
+        <main className="main-content">
+          <Routes>
+            {/* Rotas públicas */}
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
 
-      <footer className="footer">
-        <p>
-          Dados fornecidos pela{" "}
-          <a href="https://rickandmortyapi.com" target="_blank" rel="noreferrer">
-            Rick and Morty API
-          </a>{" "}
-          • Licença MIT
-        </p>
-      </footer>
+            {/* Rotas protegidas — exigem autenticação */}
+            <Route
+              path="/episodio/:id"
+              element={
+                <ProtectedRoute>
+                  <EpisodeDetail />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/diario"
+              element={
+                <ProtectedRoute>
+                  <MyDiary />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </main>
+
+        <footer className="footer">
+          <p>
+            Dados fornecidos pela{" "}
+            <a href="https://rickandmortyapi.com" target="_blank" rel="noreferrer">
+              Rick and Morty API
+            </a>{" "}
+            • Licença MIT
+          </p>
+        </footer>
+      </AuthProvider>
     </BrowserRouter>
   );
 }

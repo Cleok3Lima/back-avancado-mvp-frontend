@@ -88,7 +88,7 @@ export default function EpisodeDetail() {
       <div className="episode-detail__header">
         <div className="episode-detail__badge">{episode.episode}</div>
         <h1>{episode.name}</h1>
-        <p>📅 {episode.air_date}</p>
+        <p>📅 {new Date(episode.air_date).toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" })}</p>
       </div>
 
       {/* Grade de personagens */}
