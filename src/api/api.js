@@ -34,8 +34,8 @@ api.interceptors.response.use(
 
 // ─── Episódios ────────────────────────────────────────────────────────────────
 
-export const getEpisodes = (page = 1) =>
-  api.get("/episodios", { params: { page } });
+export const getEpisodes = (page = 1, season = null) =>
+  api.get("/episodios", { params: season ? { page, season } : { page } });
 
 export const getEpisode = (id) => api.get(`/episodios/${id}`);
 

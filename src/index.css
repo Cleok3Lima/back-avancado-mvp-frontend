@@ -116,6 +116,27 @@ a:hover {
   margin-top: 4px;
 }
 
+.page__filters {
+  margin-bottom: 1.5rem;
+}
+
+.filter-select {
+  padding: 0.5rem 0.85rem;
+  border-radius: 8px;
+  border: 1px solid var(--dark-3);
+  background: var(--dark-2);
+  color: var(--text);
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.filter-select:focus,
+.filter-select:hover {
+  border-color: var(--teal);
+}
+
 /* ─── Botões ────────────────────────────────────────────────────────────── */
 .btn {
   display: inline-block;
