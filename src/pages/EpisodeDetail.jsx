@@ -6,6 +6,7 @@ import { useParams, Link } from "react-router-dom";
 import { getEpisode, getDiario, createDiario, updateDiario } from "../api/api";
 import DiaryEntryForm from "../components/DiaryEntryForm";
 import StarRating from "../components/StarRating";
+import EPISODE_NAMES_PT from "../data/episodeNamesPt";
 
 const STATUS_PT = { Alive: "Vivo", Dead: "Morto", unknown: "N/A" };
 
@@ -62,7 +63,7 @@ export default function EpisodeDetail() {
         // Cria nova entrada
         const response = await createDiario({
           episode_id: parseInt(id),
-          episode_name: episode.name,
+          episode_name: EPISODE_NAMES_PT[episode.episode] ?? episode.name,
           nota,
           avaliacao,
         });
@@ -89,7 +90,7 @@ export default function EpisodeDetail() {
       {/* Cabeçalho do episódio */}
       <div className="episode-detail__header">
         <div className="episode-detail__badge">{episode.episode}</div>
-        <h1>{episode.name}</h1>
+        <h1>{EPISODE_NAMES_PT[episode.episode] ?? episode.name}</h1>
         <p>📅 {new Date(episode.air_date).toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" })}</p>
       </div>
 
@@ -138,7 +139,7 @@ export default function EpisodeDetail() {
           // Exibe o formulário (nova entrada ou edição)
           <DiaryEntryForm
             existingEntry={isEditing ? diaryEntry : null}
-            episodeName={episode.name}
+            episodeName={EPISODE_NAMES_PT[episode.episode] ?? episode.name}
             onSubmit={handleSubmit}
             loading={formLoading}
           />

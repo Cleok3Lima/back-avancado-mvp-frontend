@@ -2,6 +2,7 @@
 // Card exibido na página inicial para cada episódio
 
 import { Link } from "react-router-dom";
+import EPISODE_NAMES_PT from "../data/episodeNamesPt";
 
 /**
  * @param {object} episode - Objeto do episódio vindo da API
@@ -26,7 +27,7 @@ export default function EpisodeCard({ episode }) {
         <span className="badge badge--ep">Ep. {parseInt(epNumber)}</span>
       </div>
 
-      <h3 className="episode-card__title">{episode.name}</h3>
+      <h3 className="episode-card__title">{EPISODE_NAMES_PT[episode.episode] ?? episode.name}</h3>
 
       <p className="episode-card__date">
         📅 {formatDatePtBR(episode.air_date)}
