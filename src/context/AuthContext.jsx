@@ -1,18 +1,13 @@
-// context/AuthContext.jsx
-// Estado global de autenticação — expõe user, loading, login() e logout()
-
 import { createContext, useContext, useState, useEffect } from "react";
 import { getMe } from "../api/api";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  // null = não autenticado; objeto = dados do usuário logado
   const [user, setUser] = useState(null);
-  // true enquanto valida o token salvo no localStorage (evita flash de redirect)
+  // true enquanto valida o token salvo no localStorage (evita flash de redirect para /login)
   const [loading, setLoading] = useState(true);
 
-  // Ao montar: verifica se há um token válido e hidrata o estado do usuário
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {

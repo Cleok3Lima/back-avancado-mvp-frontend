@@ -1,6 +1,3 @@
-// pages/Register.jsx
-// Página de cadastro — cria uma nova conta de usuário
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { register } from "../api/api";

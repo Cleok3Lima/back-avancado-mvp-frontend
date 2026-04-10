@@ -1,15 +1,6 @@
-// components/DiaryEntryForm.jsx
-// Formulário para criar ou editar uma entrada no diário
-
 import { useState } from "react";
 import StarRating from "./StarRating";
 
-/**
- * @param {object|null} existingEntry - Entrada existente para pré-preencher o formulário (edição)
- * @param {string} episodeName - Nome do episódio (exibido acima do formulário)
- * @param {function} onSubmit - Callback chamado ao enviar: recebe { nota, avaliacao }
- * @param {boolean} loading - Desativa o botão enquanto a requisição está em andamento
- */
 export default function DiaryEntryForm({ existingEntry, episodeName, onSubmit, loading }) {
   const [nota, setNota] = useState(existingEntry?.nota || "");
   const [avaliacao, setAvaliacao] = useState(existingEntry?.avaliacao || 0);

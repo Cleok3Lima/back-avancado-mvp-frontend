@@ -1,6 +1,3 @@
-// api/api.js
-// Camada de comunicação com o backend — centraliza todas as chamadas HTTP com Axios
-
 import axios from "axios";
 
 // Instância do Axios configurada com a URL base do backend

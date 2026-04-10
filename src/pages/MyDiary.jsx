@@ -1,6 +1,3 @@
-// pages/MyDiary.jsx
-// Página "Meu Diário" — lista todas as entradas salvas com opções de editar e deletar
-
 import { useState, useEffect } from "react";
 import { getDiario, updateDiario, deleteDiario } from "../api/api";
 import DiaryEntryCard from "../components/DiaryEntryCard";

@@ -1,6 +1,3 @@
-// pages/Login.jsx
-// Página de login — autentica o usuário e armazena o token JWT
-
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginApi, getMe } from "../api/api";
@@ -21,17 +18,12 @@ export default function Login() {
     setLoading(true);
 
     try {
-      // 1. Faz login e obtém o token
       const loginRes = await loginApi({ username, password });
       const token = loginRes.data.access_token;
 
-      // 2. Salva o token temporariamente para que o interceptor o injete na próxima chamada
       localStorage.setItem("token", token);
 
-      // 3. Busca os dados do usuário
       const meRes = await getMe();
-
-      // 4. Atualiza o estado global de auth
       auth.login(token, meRes.data);
 
       navigate("/");

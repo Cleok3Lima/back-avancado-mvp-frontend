@@ -1,6 +1,3 @@
-// pages/EpisodeDetail.jsx
-// Página de detalhes de um episódio — mostra informações, personagens e formulário do diário
-
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getEpisode, getDiario, createDiario, updateDiario } from "../api/api";
@@ -87,14 +84,12 @@ export default function EpisodeDetail() {
     <div className="page">
       <Link to="/" className="btn btn--back">← Voltar aos episódios</Link>
 
-      {/* Cabeçalho do episódio */}
       <div className="episode-detail__header">
         <div className="episode-detail__badge">{episode.episode}</div>
         <h1>{EPISODE_NAMES_PT[episode.episode] ?? episode.name}</h1>
         <p>📅 {new Date(episode.air_date).toLocaleDateString("pt-BR", { day: "numeric", month: "long", year: "numeric" })}</p>
       </div>
 
-      {/* Grade de personagens */}
       {episode.characters && episode.characters.length > 0 && (
         <section className="episode-detail__section">
           <h2>Personagens ({episode.characters.length})</h2>
@@ -114,14 +109,12 @@ export default function EpisodeDetail() {
         </section>
       )}
 
-      {/* Seção do diário */}
       <section className="episode-detail__section">
         <h2>📔 Meu Diário</h2>
 
         {successMsg && <div className="alert alert--success">{successMsg}</div>}
 
         {diaryEntry && !isEditing ? (
-          // Exibe a entrada existente
           <div className="diary-existing">
             <div className="diary-existing__rating">
               <StarRating value={diaryEntry.avaliacao} readOnly size={28} />
@@ -136,7 +129,6 @@ export default function EpisodeDetail() {
             </button>
           </div>
         ) : (
-          // Exibe o formulário (nova entrada ou edição)
           <DiaryEntryForm
             existingEntry={isEditing ? diaryEntry : null}
             episodeName={EPISODE_NAMES_PT[episode.episode] ?? episode.name}

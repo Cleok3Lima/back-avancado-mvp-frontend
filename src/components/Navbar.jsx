@@ -1,6 +1,3 @@
-// components/Navbar.jsx
-// Barra de navegação global — exibe links e estado de autenticação do usuário
-
 import { useState, useRef, useEffect } from "react";
 import { Link, NavLink, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";

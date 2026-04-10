@@ -1,13 +1,6 @@
-// components/EpisodeCard.jsx
-// Card exibido na página inicial para cada episódio
-
 import { Link } from "react-router-dom";
 import EPISODE_NAMES_PT from "../data/episodeNamesPt";
 
-/**
- * @param {object} episode - Objeto do episódio vindo da API
- *   { id, name, episode, air_date }
- */
 function formatDatePtBR(dateStr) {
   if (!dateStr) return dateStr;
   const date = new Date(dateStr);

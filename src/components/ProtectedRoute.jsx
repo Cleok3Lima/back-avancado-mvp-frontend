@@ -1,6 +1,3 @@
-// components/ProtectedRoute.jsx
-// Wrapper que redireciona para /login se o usuário não estiver autenticado
-
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 

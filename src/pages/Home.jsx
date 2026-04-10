@@ -1,6 +1,3 @@
-// pages/Home.jsx
-// Página inicial — lista de episódios com paginação e filtro por temporada
-
 import { useState, useEffect } from "react";
 import { getEpisodes } from "../api/api";
 import EpisodeCard from "../components/EpisodeCard";

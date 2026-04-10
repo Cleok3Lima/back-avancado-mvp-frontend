@@ -1,15 +1,7 @@
-// components/DiaryEntryCard.jsx
-// Card exibido na página "Meu Diário" para cada entrada salva
-
 import { useState } from "react";
 import StarRating from "./StarRating";
 import DiaryEntryForm from "./DiaryEntryForm";
 
-/**
- * @param {object} entry - Entrada do diário { id, episode_id, episode_name, nota, avaliacao, created_at }
- * @param {function} onUpdate - Callback chamado ao salvar edição: (id, { nota, avaliacao })
- * @param {function} onDelete - Callback chamado ao confirmar exclusão: (id)
- */
 export default function DiaryEntryCard({ entry, onUpdate, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -29,7 +21,6 @@ export default function DiaryEntryCard({ entry, onUpdate, onDelete }) {
     setShowConfirm(false);
   };
 
-  // Formata a data para PT-BR
   const formattedDate = new Date(entry.created_at).toLocaleDateString("pt-BR", {
     day: "2-digit",
     month: "short",
@@ -65,7 +56,6 @@ export default function DiaryEntryCard({ entry, onUpdate, onDelete }) {
             </button>
           </div>
 
-          {/* Modal de confirmação de exclusão */}
           {showConfirm && (
             <div className="confirm-overlay">
               <div className="confirm-box">
