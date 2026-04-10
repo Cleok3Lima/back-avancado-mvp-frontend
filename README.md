@@ -90,7 +90,7 @@ docker-compose up --build
 
 | Rota              | Protegida | Página          | Descrição                                              |
 |-------------------|-----------|-----------------|--------------------------------------------------------|
-| `/`               | Não       | Home            | Grade de episódios com paginação                       |
+| `/`               | Não       | Home            | Grade de episódios com paginação e filtro por temporada |
 | `/login`          | Não       | Login           | Formulário de autenticação                             |
 | `/register`       | Não       | Registrar       | Formulário de cadastro de novo usuário                 |
 | `/episodio/:id`   | Sim       | Episode Detail  | Detalhes do episódio, personagens e formulário diário  |
@@ -107,7 +107,7 @@ docker-compose up --build
 | `POST`   | `/auth/register`      | —            | Cadastra novo usuário                        |
 | `POST`   | `/auth/login`         | —            | Faz login e obtém token JWT                  |
 | `GET`    | `/auth/me`            | Bearer JWT   | Valida sessão ao carregar a aplicação        |
-| `GET`    | `/episodios`          | —            | Lista episódios paginados                    |
+| `GET`    | `/episodios`          | —            | Lista episódios paginados; aceita `?season=N` |
 | `GET`    | `/episodios/{id}`     | —            | Detalhes do episódio + personagens           |
 | `GET`    | `/diario`             | Bearer JWT   | Lista entradas do diário do usuário          |
 | `POST`   | `/diario`             | Bearer JWT   | Cria nova entrada no diário                  |
@@ -147,6 +147,8 @@ docker-compose up --build
 src/
 ├── api/
 │   └── api.js                  # Instância Axios + funções de API + interceptors JWT
+├── data/
+│   └── episodeNamesPt.js       # Mapeamento de códigos de episódio para títulos em PT-BR
 ├── context/
 │   └── AuthContext.jsx         # Estado global de autenticação (AuthProvider + useAuth)
 ├── pages/
