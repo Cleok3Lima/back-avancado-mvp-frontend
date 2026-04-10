@@ -13,7 +13,7 @@ export default function MyDiary() {
 
   // Filtros
   const [filterRating, setFilterRating] = useState("");
-  const [orderBy, setOrderBy] = useState("created_at");
+  const [orderBy, setOrderBy] = useState("created_at_desc");
 
   useEffect(() => {
     fetchEntries();
@@ -94,8 +94,10 @@ export default function MyDiary() {
             value={orderBy}
             onChange={(e) => setOrderBy(e.target.value)}
           >
-            <option value="created_at">Data (mais recentes)</option>
-            <option value="avaliacao">Avaliação (maiores)</option>
+            <option value="created_at_desc">Data (mais recentes)</option>
+            <option value="created_at_asc">Data (mais antigos)</option>
+            <option value="avaliacao_desc">Avaliação (maiores)</option>
+            <option value="avaliacao_asc">Avaliação (menores)</option>
           </select>
         </div>
       </div>
