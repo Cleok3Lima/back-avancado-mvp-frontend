@@ -7,6 +7,8 @@ import { getEpisode, getDiario, createDiario, updateDiario } from "../api/api";
 import DiaryEntryForm from "../components/DiaryEntryForm";
 import StarRating from "../components/StarRating";
 
+const STATUS_PT = { Alive: "Vivo", Dead: "Morto", unknown: "N/A" };
+
 export default function EpisodeDetail() {
   const { id } = useParams();
 
@@ -103,7 +105,7 @@ export default function EpisodeDetail() {
                 <span
                   className={`character-card__status character-card__status--${char.status?.toLowerCase()}`}
                 >
-                  {char.status}
+                  {STATUS_PT[char.status] ?? char.status}
                 </span>
               </div>
             ))}
